@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_category">
+
+    <fragment
+        android:id="@+id/navigation_categoria"
+        android:name="com.example.proyecto.principal.Buttom.Category.CategoriaFragment"
+        android:label="@string/title_category"
+        tools:layout="@layout/fragment_categoria" />
+
+    <fragment
+        android:id="@+id/navigation_novedad"
+        android:name="com.example.proyecto.principal.Buttom.Novelty.NovedadesFragment"
+        android:label="@string/title_novelty"
+        tools:layout="@layout/fragment_novedades" />
+
+    <fragment
+        android:id="@+id/navigation_coleccion"
+        android:name="com.example.proyecto.principal.Buttom.Coleccion.ColeccionesFragment"
+        android:label="@string/title_coleccion"
+        tools:layout="@layout/fragment_colecciones" />
+</navigation>

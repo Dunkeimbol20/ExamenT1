@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".principal.Buttom.Novelty.NovedadesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="731dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10sp"
+        android:layout_marginVertical="5sp"
+        android:columnCount="2"
+        android:rowCount="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="269dp"
+            android:layout_columnSpan="2"
+            android:layout_marginBottom="10sp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="229dp">
+
+                <ImageView
+                    android:id="@+id/imageRice3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_activated_selector"
+                    android:clickable="true"
+                    android:contentDescription="Image Rice"
+                    android:focusable="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/fondo_ensalada_palta" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/txtRice3"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|bottom"
+                    android:text="VER RECETA COMPLETA"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:src="@drawable/baseline_circle_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@GiancarRM" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_hearth" />
+
+                    <ImageView
+                        android:layout_width="78dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/comment" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="199dp"
+            android:layout_height="444dp"
+
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="422dp"
+
+                >
+
+                <ImageView
+                    android:id="@+id/imageRice2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10sp"
+                    android:background="@drawable/background_activated_selector"
+                    android:clickable="true"
+                    android:contentDescription="Image Rice"
+                    android:focusable="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/fondo_ensalada_palta" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/txtRice2"
+                    android:layout_width="186dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|bottom"
+                    android:layout_marginBottom="15sp"
+                    android:text="VER RECETA COMPLETA"
+                    android:textColor="#FFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:src="@drawable/baseline_circle_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@GiancarRM" />
+
+                <LinearLayout
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_hearth" />
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/comment" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="445dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="422dp">
+
+                <ImageView
+                    android:id="@+id/imageRice5"
+                    android:layout_width="190dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10sp"
+                    android:background="@drawable/background_activated_selector"
+                    android:clickable="true"
+                    android:contentDescription="Image Rice"
+                    android:focusable="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/fondo_ensalada_palta" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/txtRice5"
+                    android:layout_width="186dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|bottom"
+                    android:layout_marginBottom="15sp"
+                    android:text="VER RECETA COMPLETA"
+                    android:textColor="#FFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_circle_24"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@GiancarRM" />
+
+                <LinearLayout
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_hearth" />
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/comment" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </GridLayout>
+
+</FrameLayout>

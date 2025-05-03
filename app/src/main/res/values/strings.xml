@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Demo</string>
+    <string name="title_activity_navigation_drawer">navigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Giancarlo Ramirez</string>
+    <string name="nav_header_subtitle">"@Giancarlo_rm"</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Inicio</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_slideshow">Mis recetas</string>
+    <string name="menu_config">Configuración</string>
+    <string name="title_activity_demo_menu">DemoMenu</string>
+    <string name="title_rice">ARROCES</string>
+    <string name="title_salad">ENSALADA</string>
+    <string name="title_activity_principal">PrincipalActivity</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="title_activity_navigation_bar">NavigationBarActivity</string>
+    <string name="title_category">Categorias</string>
+    <string name="title_novelty">Novedades</string>
+    <string name="title_coleccion">Colecciones</string>
+    <string name="title_activity_bottom_nav_bar">BottomNavBarActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_nav_bar_side">navBarSideActivity</string>
+    <string name="title_activity_botton_navbar_side">BottonNavbarSideActivity</string>
+
+    <string name="frgCfgLblSonido">Volumen</string>
+    <string name="frgCfgLblNotificaciones">Notificaciones</string>
+    <string-array name="cboIdiomas">
+        <item>Español</item>
+        <item>Quechua</item>
+        <item>Aymara</item>
+        <item>Ingles</item>
+        <item>Portugues</item>
+    </string-array>
+    <string name="carLblMensaje">Cargando...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

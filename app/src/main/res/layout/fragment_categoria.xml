@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".principal.Buttom.Category.CategoriaFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:padding="8dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+            <!--  Imagen de fondo  -->
+            <ImageView
+                android:id="@+id/imageRice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_activated_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="centerCrop"
+                android:alpha="0.7"
+                android:src="@drawable/fondo_arrozblanco" />
+            <!--Contenido-->
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_rice" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/txtRice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/title_rice"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            >
+            <!--  Imagen de fondo  -->
+            <ImageView
+                android:id="@+id/imagesalad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:contentDescription="Image of salad"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fondo_ensalada" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.7"
+                    android:src="@drawable/ic_plant" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/txtsalad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/title_salad"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+            <!--  Imagen de fondo  -->
+            <ImageView
+                android:id="@+id/imagePasta"
+                android:layout_width="174dp"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:contentDescription="Imagen 01"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fondo_pizza" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:alpha="0.5"
+                    android:src="@drawable/icon_plato" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/txt3"
+                    android:layout_width="171dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="PASTAS Y PIZZAS"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           >
+            <!--  Imagen de fondo  -->
+            <ImageView
+                android:id="@+id/imageVegetables"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:contentDescription="Imagen 04"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fondo_verduras" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:alpha="0.8"
+                    android:src="@drawable/ic_cubiertos" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/txtVegetables"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="VERDURAS"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+            <!--  Imagen de fondo  -->
+            <ImageView
+                android:id="@+id/imageSoup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:contentDescription="Image of soup"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fondo_sopa" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="146dp"
+                    android:layout_height="99dp"
+                    android:layout_gravity="center"
+                    android:alpha="0.8"
+                    android:src="@drawable/ic_cubiertos" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/txtSoup"
+                    android:layout_width="166dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="SOPAS, PURES Y CREMAS"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+
+            >
+            <!--  Imagen de fondo  -->
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:contentDescription="Imagen 01"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fondo_menestra" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:alpha="0.5"
+                    android:src="@drawable/icon_plato" />
+                <!--  Texto encima de la imagen  -->
+                <TextView
+                    android:id="@+id/foregroundText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="MENESTRAS"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+    </GridLayout>
+
+</FrameLayout>
