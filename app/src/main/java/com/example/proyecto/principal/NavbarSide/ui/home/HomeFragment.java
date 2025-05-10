@@ -18,7 +18,6 @@ public class HomeFragment extends Fragment {
 
     private Button btnCategoria, btnNovedad, btnColeccion;
 
-    public HomeFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +29,7 @@ public class HomeFragment extends Fragment {
         btnColeccion = view.findViewById(R.id.btnColeccion);
 
         // Fragmento por defecto al cargar
+
         cargarFragmentInterno(new CategoriaFragment());
 
         // Manejo de clics

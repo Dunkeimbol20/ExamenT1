@@ -41,6 +41,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/EditTextNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10sp"
@@ -61,6 +62,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/EditTextApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10sp"
@@ -75,17 +77,40 @@
             android:fontFamily="@font/roboto_slab_black"
             android:textSize="17sp"
             />
-        <com.google.android.material.textfield.TextInputLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10sp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnFecha"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10sp"
-                android:inputType="date"
-                android:backgroundTint="@color/white"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_gravity="center"
+                android:elevation="40dp"
+                android:text="Fecha"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/white" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/EditTextFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:enabled="false"
+                    android:textSize="20sp"
+                    android:backgroundTint="@color/white"
+                    android:inputType="datetime" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,6 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:id="@+id/EditTextUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10sp"
@@ -119,6 +145,7 @@
             android:layout_height="wrap_content"
             >
             <EditText
+                android:id="@+id/EditTextContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10sp"
