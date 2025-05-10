@@ -14,14 +14,14 @@
             android:orientation="horizontal"
             android:background="@color/white"
             >
+
                 <Button
                     android:id="@+id/btnCategoria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/boton_background"
-                    app:backgroundTint="@color/white"
-                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@drawable/textcolor_selector"
                     android:layout_margin="0dp"
                     android:text="Categoria" />
                 <Button
@@ -29,8 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/boton_background"
-                    app:backgroundTint="@color/white"
+                    android:backgroundTint="@color/white"
                     android:textColor="@color/black"
                     android:layout_margin="0dp"
                     android:text="Novedades"/>
@@ -39,8 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/boton_background"
-                    app:backgroundTint="@color/white"
+                    android:backgroundTint="@color/white"
                     android:textColor="@color/black"
                     android:layout_margin="0dp"
                     android:text="Coleccion"/>

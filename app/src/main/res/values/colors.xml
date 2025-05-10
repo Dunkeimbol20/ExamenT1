@@ -13,4 +13,6 @@
     <color name="gris_activo">#B3AFAF</color>
     <color name="gris_hover">#D6D6D6</color>
     <color name="blanco">#FFFFFF</color>
+    <color name="color_seleccionado">#979393</color>
+    <color name="color_por_defecto">#FFFFFF</color>
 </resources>

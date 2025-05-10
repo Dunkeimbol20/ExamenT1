@@ -102,8 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingHorizontal="80sp"
-            android:background="@drawable/rounded"
-            app:backgroundTint="#9BE55C"
+            android:backgroundTint="#9BE55C"
             android:fontFamily="@font/roboto_slab_black"
             android:textColor="@color/black"
             android:text="LOGIN" />
