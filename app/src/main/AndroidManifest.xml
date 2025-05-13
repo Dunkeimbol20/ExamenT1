@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto"
         tools:targetApi="31">
+        <activity
+            android:name=".principal.NavbarSide.ui.perfil.Editar.EditarPerfilActivity"
+            android:exported="false" />
         <activity
             android:name=".principal.NavbarSide.ui.config.ChangedUser.ChangedUserActivity"
             android:exported="false" />
@@ -24,10 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".principal.ButtomNavbar.BottonNavbarActivity"
-            android:exported="false"
-            android:label="@string/title_activity_botton_navbar_side" />
+
         <activity
             android:name=".principal.NavbarSide.navBarSideActivity"
             android:exported="false"
@@ -38,11 +46,20 @@
             android:exported="false" />
         <activity
             android:name=".login_user.login_user"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

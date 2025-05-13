@@ -25,5 +25,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_nav_bar_side"
         app:menu="@menu/activity_nav_bar_side_principal_drawer" >
+
     </com.google.android.material.navigation.NavigationView>
+
 </androidx.drawerlayout.widget.DrawerLayout>

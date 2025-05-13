@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@drawable/fondoprincipal"
     tools:context=".login_user.login_user">
 
@@ -16,6 +17,7 @@
         android:layout_height="298dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/platoprincipal" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,11 +38,13 @@
             android:textColor="#4CC765"
             android:textStyle="bold"
             android:text="Login"
+            android:layout_marginBottom="10sp"
             android:textSize="50sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:layout_marginBottom="10sp"
             android:gravity="center">
 
             <ImageView
@@ -50,18 +54,18 @@
                 android:layout_marginRight="5sp"
                 />
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/LoginEditTextUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="10sp"
-                    android:fontFamily="@font/roboto_slab_black"
-                    android:hint="User" />
-
-
+                    android:background="@null"
+                    android:padding="17sp"
+                    android:textSize="17sp"
+                    android:hint="Usuario" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
         <LinearLayout
@@ -77,21 +81,20 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                >
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/LoginEditTextContrasena"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="10sp"
+                    android:background="@null"
+                    android:padding="17sp"
+                    android:textSize="17sp"
                     android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:importantForAutofill="no"
-                    android:autofillHints="password"
-                    android:imeOptions="actionDone"
-                    android:fontFamily="@font/roboto_slab_black"
-                    android:hint="Password" />
+                    android:hint="Contraseña" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 

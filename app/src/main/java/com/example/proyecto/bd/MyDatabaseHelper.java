@@ -14,6 +14,7 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {
+        //tabla usuario
         String createTable = "CREATE TABLE usuarios (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "nombre TEXT," +
@@ -22,9 +23,23 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper {
                 "username TEXT,"+
                 "contrasena TEXT)";
         db.execSQL(createTable);
+        //tabla recetas
+        String createRecetasTable = "CREATE TABLE recetas (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "title VARCHAR(50)," +
+                "dificultad VARCHAR(50)," +
+                "estacion VARCHAR(50)," +
+                "tiempo VARCHAR(100)," +
+                "estado_economico VARCHAR(100)," +
+                "ingredientes TEXT," +
+                "preparacion TEXT," +
+                "user_id INTEGER," +
+                "FOREIGN KEY(user_id) REFERENCES users(id));";
+        db.execSQL(createRecetasTable);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS recetas");
         db.execSQL("DROP TABLE IF EXISTS usuarios");
         onCreate(db);
     }
