@@ -127,5 +127,12 @@
         android:textAllCaps="false"
         android:text="Registrate ahora"
         />
+<!--
+    <Button
+        android:id="@+id/btn_eliminar_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Borrar datos"/>
+!-->
 
 </LinearLayout>

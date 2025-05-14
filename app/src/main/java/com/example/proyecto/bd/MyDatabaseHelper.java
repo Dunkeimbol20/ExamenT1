@@ -8,33 +8,39 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class MyDatabaseHelper  extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "Proyecto.db";
+    public static final String DATABASE_NAME = "Proyecto.db";
     private static final int DATABASE_VERSION = 1;
     public MyDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {
         //tabla usuario
-        String createTable = "CREATE TABLE usuarios (" +
+        String createTable =
+                "CREATE TABLE usuarios (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "nombre TEXT," +
-                "apellido TEXT," +
-                "fecha TEXT," +
-                "username TEXT,"+
+                "nombre TEXT ," +
+                "apellido TEXT ," +
+                "imagen_perfil BLOB," +
+                "fecha_nacimiento TEXT ," +
+                "fecha_registro TEXT," +
+                "username TEXT ," +
                 "contrasena TEXT)";
         db.execSQL(createTable);
         //tabla recetas
-        String createRecetasTable = "CREATE TABLE recetas (" +
+        String createRecetasTable =
+                "CREATE TABLE recetas (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "title VARCHAR(50)," +
-                "dificultad VARCHAR(50)," +
-                "estacion VARCHAR(50)," +
-                "tiempo VARCHAR(100)," +
-                "estado_economico VARCHAR(100)," +
+                "titulo TEXT ," +
+                "fecha_publicacion TEXT," +
+                "imagen_receta BLOB," +
+                "dificultad TEXT," +
+                "estacion TEXT," +
+                "tiempo TEXT," +
+                "estado_economico TEXT," +
                 "ingredientes TEXT," +
                 "preparacion TEXT," +
                 "user_id INTEGER," +
-                "FOREIGN KEY(user_id) REFERENCES users(id));";
+                "FOREIGN KEY(user_id) REFERENCES usuarios(id));";
         db.execSQL(createRecetasTable);
     }
     @Override
@@ -43,12 +49,12 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS usuarios");
         onCreate(db);
     }
-    public void insertarUsuario(String Nombre, String Username,String Apellido,String Fecha,String Contrasena) {
+    public void insertarUsuario(String Nombre, String Username,String Apellido,String Fecha_nacimiento,String Contrasena) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nombre", Nombre);
         values.put("apellido", Apellido);
-        values.put("fecha",Fecha);
+        values.put("fecha_nacimiento",Fecha_nacimiento);
         values.put("username", Username);
         values.put("contrasena",Contrasena);
         db.insert("usuarios", null, values);

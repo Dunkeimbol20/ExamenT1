@@ -69,11 +69,11 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 String Username = editTextUsername.getText().toString().trim();
                 String nombre = editTextNombre.getText().toString().trim();
-                String apellidos = editTextApellido.getText().toString().trim();
+                String apellido = editTextApellido.getText().toString().trim();
                 String contrasena = editTextContrasena.getText().toString().trim();
-                String fecha = editTextfecha.getText().toString().trim();
+                String fecha_nacimiento= editTextfecha.getText().toString().trim();
             if (!nombre.isEmpty() && !Username.isEmpty()) {
-                dbHelper.insertarUsuario(nombre, Username,apellidos,fecha,contrasena);
+                dbHelper.insertarUsuario(nombre, Username,apellido,fecha_nacimiento,contrasena);
                 Toast.makeText(RegisterUser.this, "Guardado correctamente", Toast.LENGTH_SHORT).show();
                 editTextNombre.setText("");
                 editTextUsername.setText("");
@@ -92,7 +92,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             dia = c.get(Calendar.DAY_OF_MONTH);
             mes = c.get(Calendar.MONTH);
             ano = c.get(Calendar.YEAR);
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                     editTextfecha.setText(dayOfMonth + "/" + (month + 1) + "/" + year);

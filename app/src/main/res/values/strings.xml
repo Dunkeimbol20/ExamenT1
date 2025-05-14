@@ -36,6 +36,31 @@
         <item>Ingles</item>
         <item>Portugues</item>
     </string-array>
+
+    <string-array name="Dificultad">
+        <item>Facil</item>
+        <item>Intermedio</item>
+        <item>Avanzado</item>
+    </string-array>
+
+    <string-array name="Estacion">
+        <item>Verano</item>
+        <item>Invierno</item>
+        <item>Otoño</item>
+        <item>Primavera</item>
+    </string-array>
+
+    <string-array name="Tiempo">
+        <item>Menos de 15 minutos</item>
+        <item>Entre 15 y 30 minutos</item>
+        <item>Entre 30 y 45 minutos</item>
+        <item>Entre 45 y 60 minutos</item>
+    </string-array>
+
+    <string-array name="Dinero">
+        <item>Economico</item>
+        <item>Costoso</item>
+    </string-array>
     <string name="carLblMensaje">Cargando...</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,7 +1,12 @@
 package com.example.proyecto.login_user;
 
+import static com.example.proyecto.bd.MyDatabaseHelper.DATABASE_NAME;
+
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +39,7 @@ public class login_user extends AppCompatActivity implements View.OnClickListene
         });
         botonRegisterUser = findViewById(R.id.btnRegisterUser);
         botonLoginUser = findViewById(R.id.botonLoginUser);
+        //Button btnEliminarBD = findViewById(R.id.btn_eliminar_bd);
         //Asignar eventos a los botones
         botonRegisterUser.setOnClickListener(this);
         //Datos de verificacion
@@ -60,6 +66,12 @@ public class login_user extends AppCompatActivity implements View.OnClickListene
                 }
             }
         });
+        /*btnEliminarBD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eliminarBaseDeDatos(getApplicationContext());
+            }
+        });*/
     }
 
     @Override
@@ -77,6 +89,15 @@ public class login_user extends AppCompatActivity implements View.OnClickListene
     private void registro() {
         Intent iRegistro = new Intent(this, RegisterUser.class);
         startActivity(iRegistro);
+    }
+    public void eliminarBaseDeDatos(Context context) {
+        boolean eliminada = context.deleteDatabase(DATABASE_NAME);
+
+        if (eliminada) {
+            Log.d("BaseDeDatos", "Base de datos eliminada correctamente.");
+        } else {
+            Log.d("BaseDeDatos", "No se pudo eliminar la base de datos.");
+        }
     }
 
 
