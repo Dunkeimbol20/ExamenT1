@@ -4,6 +4,7 @@ import static com.example.proyecto.bd.MyDatabaseHelper.DATABASE_NAME;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,6 +55,17 @@ public class login_user extends AppCompatActivity implements View.OnClickListene
                 Toast.makeText(login_user.this, "Por favor ingresa los datos completos", Toast.LENGTH_SHORT).show();
             }else {
                 if (dbHelper.verificarLogin(username, contrasena)) {
+                    SharedPreferences preferences = getSharedPreferences("MiAppPrefs", Context.MODE_PRIVATE); // "MiAppPrefs" es el nombre del archivo
+
+                    // 2. Obtener un Editor para escribir en SharedPreferences
+                    SharedPreferences.Editor editor = preferences.edit();
+
+                    // 3. Guardar el username con la clave "logged_in_username"
+                    editor.putString("logged_in_username", username); // 'username' es la variable que contiene el username ingresado
+
+                    // 4. Confirmar los cambios (apply() es asíncrono, commit() es síncrono)
+                    editor.apply();
+
                     Toast.makeText(this, "Login correcto", Toast.LENGTH_SHORT).show();
                     // Aquí podrías abrir otra actividad y pasarle el nombre, etc.
                     Intent iPrincipal = new Intent(this, navBarSideActivity.class);
