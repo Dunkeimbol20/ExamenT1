@@ -45,6 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="10dp"
                 android:backgroundTint="@color/white"
                 android:fontFamily="@font/source_code_pro_medium"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -66,6 +69,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="10dp"
                 android:backgroundTint="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
@@ -90,6 +96,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:elevation="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="10dp"
                 android:text="Fecha"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -103,6 +112,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="10dp"
                     android:enabled="false"
                     android:textSize="20sp"
                     android:backgroundTint="@color/white"
@@ -128,6 +140,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="10dp"
                 android:backgroundTint="@color/white"
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -149,15 +164,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="10dp"
                 android:backgroundTint="@color/white"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
-            android:layout_marginTop="40sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:gravity="top"
             android:orientation="horizontal">
 
             <Button
@@ -169,21 +186,23 @@
                 android:textColor="@color/black"
                 android:textAllCaps="false"
                 android:background="@drawable/rounded_shadow"
-                android:elevation="40dp"
                 app:backgroundTint="@color/white"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="10sp"
+
                 />
             <Button
                 android:id="@+id/btnGuardar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="10sp"
-                android:layout_marginTop="10sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Guardar"
                 android:textColor="@color/black"
                 android:textAllCaps="false"
                 android:background="@drawable/rounded_shadow"
-                android:elevation="40dp"
                 app:backgroundTint="@color/white"
                 />
 

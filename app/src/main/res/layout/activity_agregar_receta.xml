@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".principal.NavbarSide.ui.perfil.AgregarReceta.AgregarRecetaActivity">
+
+        <!-- Título de la Receta -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTituloReceta"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Nombre del plato">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTituloReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Previsualización de Imagen y Botón de Carga -->
+        <ImageView
+            android:id="@+id/imageViewReceta"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_placeholder_image" /> <!-- Crea un drawable placeholder ic_placeholder_image.xml -->
+        <!-- android:contentDescription="@string/descripcion_imagen_receta" /> -->
+
+        <Button
+            android:id="@+id/btnCargarImagen"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="Cargar Imagen" />
+
+        <!-- Ingredientes -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilIngredientesReceta"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Ingredientes">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextIngredientesReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:gravity="top|start" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Preparación -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPreparacionReceta"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Preparación">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPreparacionReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:gravity="top|start" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Spinners con estilo Material Design (Exposed Dropdown Menu) -->
+        <!-- Categorías -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCategorias"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Categorías">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerCategoriasReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Dificultad -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDificultad"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Dificultad">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerDificultadReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Estación -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEstacion"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Estación">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerEstacionReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Tiempo de Preparación -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTiempo"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Tiempo de preparación">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerTiempoReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Costo Aproximado -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCosto"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:hint="Valor económico">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerCostoReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- Botones de Acción -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/CancelarReceta"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Cancelar" />
+
+            <Button
+                android:id="@+id/GuardarReceta"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guardar Receta" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

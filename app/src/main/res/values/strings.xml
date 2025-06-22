@@ -57,6 +57,15 @@
         <item>Entre 45 y 60 minutos</item>
     </string-array>
 
+    <string-array name="Categorias">
+        <item>Arroces</item>
+        <item>Ensalada</item>
+        <item>Pastas y Pizzas</item>
+        <item>Verduras</item>
+        <item>Sopas,Pures y Cremas</item>
+        <item>Menestras</item>
+    </string-array>
+
     <string-array name="Dinero">
         <item>Economico</item>
         <item>Costoso</item>

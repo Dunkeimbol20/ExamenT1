@@ -35,7 +35,6 @@ public class PerfilFragment extends Fragment   {
         PbtnAgregarReceta = view.findViewById(R.id.PbtnAgregarReceta);
         if (savedInstanceState == null) {
             PerfilcargarFragmentInterno(new Perfil_PrincipalFragment());
-            // Establecer el estado inicial del primer botón como seleccionado
             selectedButton = PbtnPrincipal;
         }
 
@@ -45,16 +44,12 @@ public class PerfilFragment extends Fragment   {
                 String usernameDelUsuarioActual = obtenerUsernameDelUsuarioLogueado(); // Debes implementar este método o usar tu lógica
 
                 if (usernameDelUsuarioActual != null && !usernameDelUsuarioActual.isEmpty()) {
-                    // Crear el Intent para lanzar EditarPerfilActivity
                     Intent intent = new Intent(getActivity(), EditarPerfilActivity.class);
 
-                    // ¡Añadir el username como un extra en el Intent!
                     intent.putExtra("username", usernameDelUsuarioActual);
 
-                    // Iniciar la actividad de edición de perfil
                     startActivity(intent);
                 } else {
-                    // Manejar el caso donde no se pudo obtener el username del usuario logueado
                     Toast.makeText(getContext(), "Error: No se pudo obtener el usuario actual.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -77,9 +72,7 @@ public class PerfilFragment extends Fragment   {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Clean up bindings if you were using View Binding,
-        // but your current code uses findViewById, so this might not be necessary
-        // unless you add View Binding later.
+
     }
 
 
@@ -90,16 +83,10 @@ public class PerfilFragment extends Fragment   {
                 .commit();
     }
     private String obtenerUsernameDelUsuarioLogueado() {
-        // Ejemplo usando SharedPreferences (esto es solo un ejemplo, tu implementación puede variar)
-        // Asegúrate de guardar el username en SharedPreferences cuando el usuario inicia sesión
         SharedPreferences preferences = getActivity().getSharedPreferences("MiAppPrefs", Context.MODE_PRIVATE);
-        String username = preferences.getString("logged_in_username", null); // "logged_in_username" es la clave que usaste al guardar
+        String username = preferences.getString("logged_in_username", null);
         return username;
 
-        // Ejemplo si el username se pasa como argumento al fragmento:
-        // if (getArguments() != null && getArguments().containsKey("username")) {
-        //     return getArguments().getString("username");
-        // }
-        // return null; // O maneja el caso de que no se haya pasado el argumento
+
     }
 }

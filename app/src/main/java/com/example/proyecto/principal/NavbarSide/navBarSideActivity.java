@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -30,8 +31,8 @@ import com.example.proyecto.R;
 import com.example.proyecto.databinding.ActivityNavBarSidePrincipalBinding;
 import com.example.proyecto.login_user.login_user;
 
-import java.util.Map;
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 public class navBarSideActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -39,13 +40,16 @@ public class navBarSideActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView navigationView;
 
-    private MyDatabaseHelper dbHelper;
     private String loggedInUsername;
+    public static final String PREFS_NAME = "MiAppPrefs";
+    public static final String KEY_LOGGED_IN_USERNAME = "logged_in_username";
+    public static final String KEY_USER_NAME = "user_name";
+    public static final String KEY_USER_PROFILE_IMAGE_URL = "user_profile_image_url";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d("NavBarSideActivity", "onCreate - INICIO");
         binding = ActivityNavBarSidePrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -54,12 +58,10 @@ public class navBarSideActivity extends AppCompatActivity {
 
         drawer = binding.drawerLayout;
         navigationView = binding.navView;
-        dbHelper = new MyDatabaseHelper(this);
 
-        SharedPreferences preferences = getSharedPreferences("MiAppPrefs", Context.MODE_PRIVATE);
-        loggedInUsername = preferences.getString("logged_in_username", null);
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        loggedInUsername = preferences.getString(KEY_LOGGED_IN_USERNAME, null);
         displayUserInfoInNavDrawer();
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -74,16 +76,18 @@ public class navBarSideActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-
+                boolean handled = false;
                 if (id == R.id.nav_cerrar_sesion) {
                     cerrarSesion();
-                    return true;
+                    handled = true;
+                }else{
+                    handled = NavigationUI.onNavDestinationSelected(item, navController);
+
                 }
+                if(handled){
+                    drawer.closeDrawers();
 
-                boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
-
-                drawer.closeDrawers();
-
+                }
                 return handled;
             }
         });
@@ -104,74 +108,78 @@ public class navBarSideActivity extends AppCompatActivity {
     }
 
     private void cerrarSesion() {
+        // Limpiar SharedPreferences
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(KEY_LOGGED_IN_USERNAME);
+        editor.remove(KEY_USER_NAME);
+        editor.remove(KEY_USER_PROFILE_IMAGE_URL);
+        editor.apply();
+
         Intent intent = new Intent(this, login_user.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        Toast.makeText(this, "Cerrando sesion", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Cerrando sesión...", Toast.LENGTH_SHORT).show();
         finish();
     }
-
-    @SuppressLint("SetTextI18n")
     private void displayUserInfoInNavDrawer() {
+        View headerView = navigationView.getHeaderView(0);
+        if (headerView == null) {
+            Log.e("NavBarSideActivity", "HeaderView no encontrado en NavigationView");
+            return;
+        }
+
+        TextView textViewName = headerView.findViewById(R.id.navHeaderUserName);
+        TextView textViewUsername = headerView.findViewById(R.id.navHeaderUsername);
+        ImageView imageViewProfile = headerView.findViewById(R.id.navHeaderUserProfileImage);
+
+        if (textViewName == null || textViewUsername == null || imageViewProfile == null) {
+            Log.e("NavBarSideActivity", "Alguna vista (nombre, username, imagen) no fue encontrada en el header.");
+            // Aun así, intenta poner valores por defecto si algunas vistas existen
+            if (textViewName != null) textViewName.setText("Usuario Invitado");
+            if (textViewUsername != null) textViewUsername.setText("Inicia sesión");
+            if (imageViewProfile != null) imageViewProfile.setImageResource(R.mipmap.ic_launcher_round); // Placeholder muy genérico
+            return;
+        }
+
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        // loggedInUsername ya está disponible como variable de instancia
+        String userNameFromPrefs = preferences.getString(KEY_USER_NAME, "Usuario");
+        String profileImageUrlFromPrefs = preferences.getString(KEY_USER_PROFILE_IMAGE_URL, null);
+
         if (loggedInUsername != null && !loggedInUsername.isEmpty()) {
-            // <<-- Usa getUserData que devuelve el Map con la imagen
-            Map<String, Object> userData = dbHelper.getUserData(loggedInUsername);
+            // Usuario logueado
+            Log.d("NavBarSideActivity", "Usuario logueado: " + loggedInUsername);
+            Log.d("NavBarSideActivity", "Nombre desde Prefs: " + userNameFromPrefs);
+            Log.d("NavBarSideActivity", "URL Imagen desde Prefs: " + profileImageUrlFromPrefs);
 
-            // Encuentra la vista del encabezado
-            View headerView = navigationView.getHeaderView(0);
+            textViewName.setText(userNameFromPrefs);
+            textViewUsername.setText("@" + loggedInUsername);
 
-            TextView textViewName = headerView.findViewById(R.id.navHeaderUserName);
-            TextView textViewUsername = headerView.findViewById(R.id.navHeaderUsername);
-            ImageView imageViewProfile = headerView.findViewById(R.id.navHeaderUserProfileImage);
-
-
-            if (textViewName != null && textViewUsername != null && imageViewProfile != null && userData != null) {
-                String userName = (String) userData.get("nombre");
-                String userUsername = (String) userData.get("username"); // Puedes usar el de prefs o este
-
-                byte[] imagenBytes = (byte[]) userData.get("imagen_perfil");
-
-                if (userName != null && !userName.isEmpty()) {
-                    textViewName.setText(userName);
-                } else {
-                    textViewName.setText("Usuario");
-                }
-
-                if (userUsername != null && !userUsername.isEmpty()) {
-                    textViewUsername.setText("@"+userUsername);
-                } else {
-                    textViewUsername.setText(loggedInUsername != null ? loggedInUsername : "");
-                }
-
-                // <<-- Muestra la imagen de perfil
-                if (imagenBytes != null && imagenBytes.length > 0) {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(imagenBytes, 0, imagenBytes.length);
-                    if (bitmap != null) {
-                        imageViewProfile.setImageBitmap(bitmap);
-                    } else {
-                        imageViewProfile.setImageResource(R.mipmap.ic_launcher_round);
-                    }
-                } else {
-                    imageViewProfile.setImageResource(R.mipmap.ic_launcher_round);
-                }
-
+            if (profileImageUrlFromPrefs != null && !profileImageUrlFromPrefs.isEmpty()) {
+                Glide.with(this)
+                        .load(profileImageUrlFromPrefs)
+                        .placeholder(R.drawable.ic_profile_placeholder) // Debes crear este drawable
+                        .error(R.drawable.user_default) // Tu user_default.png en drawables
+                        .apply(RequestOptions.circleCropTransform()) // Para hacerla circular
+                        .into(imageViewProfile);
             } else {
-                if (textViewName != null) textViewName.setText("Usuario Invitado");
-                if (textViewUsername != null) textViewUsername.setText("");
-                if (imageViewProfile != null)
-                    imageViewProfile.setImageResource(R.mipmap.ic_launcher_round);
+                // Si no hay URL en SharedPreferences o está vacía, muestra una imagen por defecto local
+                Glide.with(this)
+                        .load(R.drawable.user_default)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(imageViewProfile);
+                Log.d("NavBarSideActivity", "URL de imagen de perfil no encontrada en SharedPreferences, usando imagen por defecto.");
             }
         } else {
-            View headerView = navigationView.getHeaderView(0);
-            TextView textViewName = headerView.findViewById(R.id.navHeaderUserName);
-            TextView textViewUsername = headerView.findViewById(R.id.navHeaderUsername);
-            ImageView imageViewProfile = headerView.findViewById(R.id.navHeaderUserProfileImage);
-
-            if (textViewName != null) textViewName.setText("Usuario Invitado");
-            if (textViewUsername != null)
-                textViewUsername.setText("Inicia sesión");
-            if (imageViewProfile != null)
-                imageViewProfile.setImageResource(R.mipmap.ic_launcher_round);
+            // Usuario no logueado
+            Log.d("NavBarSideActivity", "Usuario no logueado, mostrando información de invitado.");
+            textViewName.setText("Usuario Invitado");
+            textViewUsername.setText("Inicia sesión");
+            Glide.with(this)
+                    .load(R.drawable.user)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(imageViewProfile);
         }
     }
 }

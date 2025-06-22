@@ -138,11 +138,9 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper {
         int rowsAffected = -1;
 
         try {
-            // Ponemos los nuevos valores de los campos de texto en ContentValues
-            // Solo agregamos las columnas que están en el Map userDetails
+
             if (userDetails != null) {
                 for (Map.Entry<String, String> entry : userDetails.entrySet()) {
-                    // Verificamos si la clave corresponde a una columna que queremos actualizar
                     if (entry.getKey().equals("nombre") ||
                             entry.getKey().equals("apellido") ||
                             //entry.getKey().equals("fecha_nacimiento") ||
@@ -153,7 +151,6 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper {
                 }
             }
 
-            // Solo procede si hay valores para actualizar
             if (values.size() > 0) {
                 String selection = "username" + " = ?";
                 String[] selectionArgs = {username};
@@ -165,7 +162,6 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper {
                         selectionArgs
                 );
             } else {
-                // No hay valores de texto para actualizar
                 rowsAffected = 0;
             }
 
@@ -173,55 +169,50 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper {
             e.printStackTrace();
             rowsAffected = -1; // Indicar error
         } finally {
-            db.close(); // Cerrar la base de datos
+            db.close();
         }
 
         return rowsAffected;
     }
     public int updateProfilePicture(String username, byte[] imageData) {
-        SQLiteDatabase db = this.getWritableDatabase(); // Obtenemos una instancia escribible
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         int rowsAffected = -1;
 
         try {
-            // Si imageData es null, establecer la columna imagen_perfil a NULL en la base de datos
             if (imageData != null) {
                 values.put("imagen_perfil", imageData);
             } else {
-                values.putNull("imagen_perfil"); // Usa putNull para establecer el valor a NULL
+                values.putNull("imagen_perfil");
             }
 
-            // Definimos la cláusula WHERE para actualizar por nombre de usuario
             String selection = "username" + " = ?";
-            // Definimos los argumentos para la cláusula WHERE
             String[] selectionArgs = {username};
 
-            // Realizamos la operación de actualización
-            // Solo procedemos si hay un valor en values (que siempre debería haber si imageData es null o no)
             if (values.size() > 0) {
                 rowsAffected = db.update(
-                        "usuarios",  // La tabla a actualizar (nombre de tu tabla)
-                        values,          // Los nuevos valores (solo la imagen de perfil o NULL)
-                        selection,       // La cláusula WHERE
-                        selectionArgs    // Los argumentos de la cláusula WHERE
+                        "usuarios",
+                        values,
+                        selection,
+                        selectionArgs
                 );
             } else {
-                rowsAffected = 0; // No hay nada que actualizar (situación poco probable aquí)
+                rowsAffected = 0;
             }
 
         } catch (Exception e) {
-            // Manejar posibles errores de la base de datos
+
             e.printStackTrace();
-            rowsAffected = -1; // Indicar error
+            rowsAffected = -1;
         } finally {
-            db.close(); // Cerrar la base de datos
+            db.close();
         }
 
-        return rowsAffected; // Retorna el número de filas afectadas
+        return rowsAffected;
     }
 
     public int deleteProfilePicture(String username) {
-        return updateProfilePicture(username, null); // Llama a updateProfilePicture pasando null
+        return updateProfilePicture(username, null);
     }
 
     public long insertarReceta(int user_id, String titulo, String fecha_publicacion, String imagen_receta_path,
@@ -241,33 +232,31 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper {
         values.put("ingredientes", ingredientes);
         values.put("preparacion", preparacion);
 
-        // Insertar la nueva fila y obtener el ID de la fila insertada
-        long newRowId = db.insert("recetas", null, values); // Asegúrate de que el nombre de la tabla sea "recetas"
+        long newRowId = db.insert("recetas", null, values);
 
-        db.close(); // Cerrar la conexión a la base de datos
+        db.close();
 
-        return newRowId; // Retorna el ID de la fila insertada, o -1 si hay un error
+        return newRowId;
     }
     public int getUserIdByUsername(String username) {
         int userId = -1;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] projection = {"id"}; // Queremos obtener la columna 'id'
-        String selection = "username = ?"; // Donde el username coincide
+        String[] projection = {"id"};
+        String selection = "username = ?";
         String[] selectionArgs = {username};
 
         Cursor cursor = db.query(
-                "usuarios",       // La tabla a consultar
-                projection,    // Las columnas a retornar
-                selection,     // Las columnas para la cláusula WHERE
-                selectionArgs, // Los valores para la cláusula WHERE
-                null,          // No agrupar las filas
-                null,          // No filtrar por grupos de filas
-                null           // El orden de clasificación
+                "usuarios",
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
         );
 
         if (cursor != null && cursor.moveToFirst()) {
-            // Obtener el índice de la columna 'id' y luego su valor entero
             int idColumnIndex = cursor.getColumnIndexOrThrow("id");
             userId = cursor.getInt(idColumnIndex);
         }
