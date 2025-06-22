@@ -7,21 +7,17 @@ import androidx.annotation.NonNull;
 public class Usuario {
 
     @PrimaryKey(autoGenerate = true)
-    public int idLocal; // ID interno para Room, se genera solo
+    public int idLocal;
 
-    @NonNull // Hacemos que el username no pueda ser null
-    public String username; // Este es el que usaremos para buscar
+    @NonNull
+    public String username;
 
     public String nombre;
     public String apellidos;
     public String fechaNacimiento;
-    public String fechaRegistro;     // La fecha que vino del servidor
-    public String imagenPerfil;      // La URL de la imagen que vino del servidor
+    public String fechaRegistro;
+    public String imagenPerfil;
 
-    // ¡IMPORTANTE! No hay campo para 'contrasena' aquí.
-
-    // Constructor que usarás para crear un objeto Usuario DESPUÉS de un login/registro exitoso con el servidor.
-    // No ponemos 'idLocal' en el constructor porque Room lo genera.
     public Usuario(@NonNull String username, String nombre, String apellidos,
                    String fechaNacimiento, String fechaRegistro, String imagenPerfil) {
         this.username = username;

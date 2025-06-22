@@ -40,7 +40,7 @@ public class UserResponseWrapper { // Renombrada para mayor claridad, o puedes m
         public int getId() { return id; }
         public String getNombre() { return nombre; }
         public String getApellido() { return apellido; }
-        public String getUsername() { return username; } // <--- Este es el que necesitas
+        public String getUsername() { return username; }
         public String getImagenPerfilUrl() { return imagenPerfilUrl; }
         public String getFechaNacimiento() { return fechaNacimiento; }
         public String getFechaRegistro() { return fechaRegistro; }

@@ -19,15 +19,13 @@ public class UserData {
     private String imagenPerfilUrl;
 
     @SerializedName("fecha_nacimiento")
-    private String fechaNacimiento; // Mantener como String, se parseará después
+    private String fechaNacimiento;
 
     @SerializedName("fecha_registro")
-    private String fechaRegistro;   // Mantener como String, se parseará después
+    private String fechaRegistro;
 
-    // Constructor vacío (Gson puede necesitarlo)
     public UserData() {}
 
-    // Getters (necesarios para acceder a los datos)
     public int getId() { return id; }
     public String getNombre() { return nombre; }
     public String getApellido() { return apellido; }
@@ -36,8 +34,7 @@ public class UserData {
     public String getFechaNacimiento() { return fechaNacimiento; }
     public String getFechaRegistro() { return fechaRegistro; }
 
-    // Setters (opcionales, Gson generalmente no los necesita para deserializar)
-    // ... (puedes añadirlos si los necesitas)
+
 
     @Override
     public String toString() {

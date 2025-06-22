@@ -1,6 +1,8 @@
 package com.example.proyecto.login_user;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -30,13 +32,6 @@ import com.example.proyecto.data.remote.client.RetrofitClient;
 import com.example.proyecto.principal.NavbarSide.navBarSideActivity;
 import com.example.proyecto.register_user.RegisterUser;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,6 +47,11 @@ public class login_user extends AppCompatActivity {
     Button botonRegisterUser,botonLoginUser;
     private UserResponse userResponse;
     private ApiService apiService;
+    public static final String PREFS_NAME = "MiAppPrefs";
+    public static final String KEY_LOGGED_IN_USERNAME = "logged_in_username";
+    public static final String KEY_USER_NAME = "user_name";
+    public static final String KEY_USER_PROFILE_IMAGE_URL = "user_profile_image_url";
+    public static final String KEY_IS_LOGGED_IN = "IS_LOGGED_IN";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,34 +103,40 @@ public class login_user extends AppCompatActivity {
                     UserData userData = userResponse.getUser();   // Obtienes el UserData anidado
 
                     if (userData != null && userData.getUsername() != null && !userData.getUsername().isEmpty()) {
-                        // Login exitoso y tenemos datos del usuario
-                        Log.d("Login", "Login exitoso con Retrofit: " + userData.toString());
-                        // Aquí guardarías el usuario en Room usando userData
-                        guardarUsuarioEnRoom(userData);
+                        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString(KEY_LOGGED_IN_USERNAME, userData.getUsername());
+                        String nombreCompleto = "";
+                        if (userData.getNombre() != null && !userData.getNombre().isEmpty()) {
+                            nombreCompleto += userData.getNombre();
+                        }
+                        if (userData.getApellido() != null && !userData.getApellido().isEmpty()) {
+                            if (!nombreCompleto.isEmpty()) nombreCompleto += " ";
+                            nombreCompleto += userData.getApellido();
+                        }
+                        editor.putString(KEY_USER_NAME, nombreCompleto.isEmpty() ? userData.getUsername() : nombreCompleto);
 
+                        editor.putString(KEY_USER_PROFILE_IMAGE_URL, userData.getImagenPerfilUrl());
+                        editor.putBoolean(KEY_IS_LOGGED_IN, true);
+                        editor.apply();
+                        guardarUsuarioEnRoom(userData);
+                        Toast.makeText(login_user.this, "Login Exitoso!", Toast.LENGTH_SHORT).show();
                         // Navegar a la siguiente actividad
                         Intent iPrincipal = new Intent(login_user.this, navBarSideActivity.class);
                         iPrincipal.putExtra("USER_USERNAME", userData.getUsername());
-                        // También puedes pasar otros datos si es necesario
-                        // iPrincipal.putExtra("USER_NOMBRE", userData.getNombre());
+                        iPrincipal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(iPrincipal);
                         finish();
 
                     } else {
-                        // El servidor respondió OK, pero no hay datos de usuario o username es nulo
-                        Log.e("Login", "Respuesta exitosa pero sin datos de usuario o username nulo.");
                         Toast.makeText(login_user.this, "Error en los datos recibidos del servidor.", Toast.LENGTH_LONG).show();
-                        // Considera llamar a autenticarLocal aquí si es tu lógica de fallback
                         autenticarLocal(username, contrasena);
                     }
                 } else {
-                    // Error en la respuesta del servidor (4xx, 5xx, etc.)
-                    // Podrías intentar parsear el errorBody si tu API devuelve errores específicos en JSON
                     String errorMsg = "Credenciales inválidas o error del servidor.";
-                    if (response.code() == 401) { // Unauthorized
+                    if (response.code() == 401) {
                         errorMsg = "Usuario o contraseña incorrectos.";
                     }
-                    Log.e("Login", "Error en login con Retrofit: " + response.code() + " - " + response.message());
                     Toast.makeText(login_user.this, errorMsg, Toast.LENGTH_LONG).show();
                     // Lógica de fallback si falla la autenticación online
                     autenticarLocal(username, contrasena);
@@ -140,8 +146,6 @@ public class login_user extends AppCompatActivity {
             @OptIn(markerClass = UnstableApi.class)
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
-                // Fallo en la red o al procesar la petición/respuesta
-                Log.e("Login", "Fallo en la llamada de login con Retrofit: " + t.getMessage(), t);
                 Toast.makeText(login_user.this, "Error de conexión. Intentando autenticación local.", Toast.LENGTH_LONG).show();
                 autenticarLocal(username, contrasena); // Fallback a la autenticación local
             }
@@ -149,10 +153,7 @@ public class login_user extends AppCompatActivity {
     }
             @OptIn(markerClass = UnstableApi.class)
             private void guardarUsuarioEnRoom(UserData userData) {
-                // Validación crucial
                 if (userData.getUsername() == null || userData.getUsername().trim().isEmpty()) {
-                    Log.e("LoginDB", "Intento de guardar usuario con username nulo o vacío en Room.");
-                    // Decide cómo manejar esto, quizás mostrar un error genérico
                     return;
                 }
 
@@ -162,7 +163,6 @@ public class login_user extends AppCompatActivity {
                     try {
                         fechaNacimientoDate = sdf.parse(userData.getFechaNacimiento());
                     } catch (ParseException e) {
-                        Log.e("LoginDB", "Error parseando fecha nacimiento para Room: " + userData.getFechaNacimiento(), e);
                     }
                 }
 
@@ -172,22 +172,12 @@ public class login_user extends AppCompatActivity {
                     try {
                         fechaRegistroDate = sdfServerFormatRegistro.parse(userData.getFechaRegistro());
                     } catch (ParseException e) {
-                        Log.e("LoginDB", "Error al parsear fecha de registro (yyyy-MM-dd HH:mm:ss) para Room: " + userData.getFechaRegistro(), e);
-                        // Intenta con otro formato si el primero falla, por ejemplo, solo fecha
-                        try {
-                            sdfServerFormatRegistro = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                            fechaRegistroDate = sdfServerFormatRegistro.parse(userData.getFechaRegistro());
-                        } catch (ParseException ex) {
-                            Log.e("LoginDB", "Error al parsear fecha de registro (yyyy-MM-dd) para Room: " + userData.getFechaRegistro(), ex);
-                        }
+
                     }
                 }
-
-                // Aquí debes decidir qué entidad de Room usar.
-                // Si tienes una CachedUserEntity como en RegisterUser:
                 CachedUserEntity cachedUser = new CachedUserEntity(
                         userData.getId(),
-                        userData.getUsername(), // Este es el importante
+                        userData.getUsername(),
                         userData.getNombre(),
                         userData.getApellido(),
                         userData.getImagenPerfilUrl(),
@@ -197,17 +187,7 @@ public class login_user extends AppCompatActivity {
                         System.currentTimeMillis()
                 );
 
-                Log.d("LoginDB_CACHE_INSERT", "Intentando insertar/reemplazar en Room (Login)...");
-                Log.d("LoginDB_CACHE_INSERT", "ServerID: " + cachedUser.getServerId());
-                Log.d("LoginDB_CACHE_INSERT", "Username: " + cachedUser.getUsername());
-                Log.d("LoginDB_CACHE_INSERT", "Nombre: " + cachedUser.getNombre());
-                Log.d("LoginDB_CACHE_INSERT", "Apellido: " + cachedUser.getApellido());
-                Log.d("LoginDB_CACHE_INSERT", "ImgURL: " + cachedUser.getImagenPerfilUrl());
-                Log.d("LoginDB_CACHE_INSERT", "FechaNac: " + (cachedUser.getFechaNacimiento() != null ? cachedUser.getFechaNacimiento().toString() : "null"));
-                Log.d("LoginDB_CACHE_INSERT", "FechaReg: " + (cachedUser.getFechaRegistro() != null ? cachedUser.getFechaRegistro().toString() : "null"));
-                Log.d("LoginDB_CACHE_INSERT", "Token: " + cachedUser.getContrasenaOToken());
-                Log.d("LoginDB_CACHE_INSERT", "TimestampCache: " + cachedUser.getFechaCacheadoTimestamp());
-                // --- FIN DE LOGS DE DEPURACIÓN ---
+
 
                 AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
 
@@ -215,18 +195,8 @@ public class login_user extends AppCompatActivity {
                     try {
                         CachedUserDao cachedUserDao = db.cachedUserDao(); // O el nombre correcto de tu DAO
                         cachedUserDao.insertUser(cachedUser); // Asume OnConflictStrategy.REPLACE
-                        Log.i("LoginDB_CACHE_INSERT", "Inserción/Reemplazo en Room (Login) completado para: " + cachedUser.getUsername());
-                        //Log.d("LoginDB", "Usuario " + userData.getUsername() + " guardado/actualizado en Room después del login.");
-                        // --- INICIO DE PRUEBA DE LECTURA ---
-                        Log.d("LoginDB_CACHE_READ", "Intentando leer de Room (Login): " + cachedUser.getUsername());
-                        CachedUserEntity userFromDb = cachedUserDao.getUserByUsername(cachedUser.getUsername());
 
-                        if (userFromDb != null) {
-                            Log.i("LoginDB_CACHE_READ", "ÉXITO LECTURA (Login)! Usuario '" + userFromDb.getUsername() + "' encontrado en DB. Nombre: " + userFromDb.getNombre());
-                        } else {
-                            Log.e("LoginDB_CACHE_READ", "FALLO LECTURA (Login)! Usuario '" + cachedUser.getUsername() + "' NO encontrado en DB después de insertar.");
-                        }
-                        // --- FIN DE PRUEBA DE LECTURA ---
+
                     } catch (Exception e) {
                         Log.e("LoginDB", "Error al guardar usuario en Room después del login: ", e);
                     }
@@ -241,14 +211,29 @@ public class login_user extends AppCompatActivity {
 
 
                     Usuario usuarioLocal = dao.obtenerUsuarioParaFallbackPorUsername(username);
-                    ;
 
 
                     new Handler(Looper.getMainLooper()).post(() -> {
                         if (usuarioLocal != null) {
-                            // Si la autenticación local no verifica contraseña, y solo username:
-                            // Deberías también verificar la contraseña aquí si la tienes hasheada localmente.
-                            // Este es un ejemplo simple donde solo la existencia del username en local cuenta.
+                            SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+
+                            editor.putString(KEY_LOGGED_IN_USERNAME, usuarioLocal.username);
+
+                            String nombreCompletoLocal = "";
+                            if (usuarioLocal.nombre != null && !usuarioLocal.nombre.isEmpty()) {
+                                nombreCompletoLocal += usuarioLocal.nombre;
+                            }
+                            if (usuarioLocal.apellidos != null && !usuarioLocal.apellidos.isEmpty()) {
+                                if (!nombreCompletoLocal.isEmpty()) nombreCompletoLocal += " ";
+                                nombreCompletoLocal += usuarioLocal.apellidos;
+                            }
+                            editor.putString(KEY_USER_NAME, nombreCompletoLocal.isEmpty() ? usuarioLocal.username : nombreCompletoLocal);
+                            editor.putString(KEY_USER_PROFILE_IMAGE_URL, usuarioLocal.imagenPerfil);
+                            editor.putBoolean(KEY_IS_LOGGED_IN, true);
+                            editor.apply();
+
+                            Toast.makeText(login_user.this, "Login local exitoso.", Toast.LENGTH_SHORT).show();
                             Intent iPrincipal = new Intent(login_user.this, navBarSideActivity.class);
                             iPrincipal.putExtra("USER_USERNAME", usuarioLocal.username);
                             startActivity(iPrincipal);

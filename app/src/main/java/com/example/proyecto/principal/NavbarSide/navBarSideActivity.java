@@ -1,11 +1,8 @@
 
 package com.example.proyecto.principal.NavbarSide;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -18,7 +15,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.proyecto.bd.MyDatabaseHelper;
 import com.google.android.material.navigation.NavigationView;
 
 import android.view.Menu;
